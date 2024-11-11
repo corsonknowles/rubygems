@@ -9,10 +9,11 @@ module Bundler
     end
 
     def run
+      console = get_console(Bundler.settings[:console] || "irb")
+
       group ? Bundler.require(:default, *group.split(" ").map!(&:to_sym)) : Bundler.require
       ARGV.clear
 
-      console = get_console(Bundler.settings[:console] || "irb")
       console.start
     end
 
